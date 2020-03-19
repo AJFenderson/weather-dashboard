@@ -1,7 +1,8 @@
 var todaysDate= $("#time").text(setTime);
 //grab a key from api weather
 var key= "71b2fba15d028a1cd9dcf3e77b5127d0";
-var queryUrl= "api.openweathermap.org/data/2.5/forecast?q=Nashville&appid=" + key;
+var queryTerm=""
+var queryUrl= "https://api.openweathermap.org/data/2.5/forecast?q=Nashville&appid=" + key;
 console.log(queryUrl);
 
 //create a function to run the time
@@ -14,7 +15,7 @@ function setTime(){
 // create a function to keep the records of the city
 //create a function that will run the colors of the uv
 // create a function that will run the weather
-//create a function that will fun the 5 day forecast
+//create a function that will run the 5 day forecast
 // need 3 ajax calls
 // 1. 5 days of weather 2.for the uv 3. current date
 

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Weather Report</title>
+
+    <!-- style sheet -->
+
+    <link rel="stylesheet" href="assets/style.css" />
+
+    <!-- Bootstrap CSS CDN  -->
+
+    <link
+
+      rel="stylesheet"
+
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css"
+
+    />
+
+    <!-- font awesome -->
+
+    <link
+
+      rel="stylesheet"
+
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+
+      crossorigin="anonymous"
+
+    />
+
+  </head>
+
+  <body>
+
+    <!-- Jumbotron opens -->
+
+    <div class="jumbotron jumbotron-fluid">
+
+      <div class="container">
+
+        <h1 class="display-4">Weather Report</h1>
+
+        <p class="lead">
+
+          Welcome to the easiest and funniest weather report page out there.
+
+        </p>
+
+        <p id="currentDay"></p>
+
+      </div>
+
+      <!-- Jumbotron closes -->
+
+    </div>
+
+
+
+    <div class="row">
+
+      <!-- col search opens -->
+
+      <div class="col s12 m4 l3">
+
+        <!-- container search opens -->
+
+        <div class="container" id="container">
+<form id="form">
+    <input placeholder="city search" id= "userInput" />
+    <button id="btn" >search</button>
+    
+</form>
+          <!-- container search closes  -->
+
+        </div>
+
+
+
+        <!-- container for weather information opens -->
+
+        <div class="container" id="lastCities">
+
+          here goes the last cities searched.
+
+          <!-- container for weather information closes -->
+
+        </div>
+
+        <!-- col search closes -->
+
+      </div>
+
+      <!-- col weather opens -->
+
+      <div class="col s12 m8 l9">
+
+        <!-- container map opens -->
+
+        <div class="container" id="weatherBox">
+
+          <!-- Note that "m8 l9" was added -->
+<p id="city">city:</p>
+<p id="date">date:</p>
+<p id="temp">temp:</p>
+<p id="humidity">humidity:</p>
+<p id="wind">wind:</p>
+<p id="uv">uv:</p>
+
+
+
+          <!--weather box container closes  -->
+
+        </div>
+
+        <!-- col weather closes -->
+
+      </div>
+
+    </div>
+
+
+
+    <!-- jQuery JS -->
+
+    <script src="https://code.jquery.com/jquery.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+
+    <!-- moment js -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+    <!-- Code to the JavaScript File -->
+
+    <script src="assets/script.js"></script>
+
+    <!-- <script src="try.js"></script> -->
+
+  </body>
+
+  <!-- <footer>&copy; Created by Andrea Fenderson</footer> -->

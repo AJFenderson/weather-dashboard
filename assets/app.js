@@ -1,4 +1,4 @@
-// make my button work
+// make my button work; nothing happens in js until my button is clicked//
 $("#btn").on("click", function (e) {
     e.preventDefault();
 
@@ -18,8 +18,24 @@ $("#btn").on("click", function (e) {
     }
 
     function weather() {
-        var queryUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + userSearch + "&appid=" + key;
-        console.log(queryUrl);
+        var queryUrlWeather ="https://api.openweathermap.org/data/2.5/weather?q=" + userSearch + "&appid=" + key;
+        
+        $.ajax({
+            url: queryUrlWeather,
+            method: "GET"
+        })
+
+        .then(function (response) {
+            console.log(response);
+
+            $("#city").text(response.name);
+        })
+    }
+    weather();
+ //create a function that will run the 5 day forecast
+    function forecast() {
+        var queryUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + userSearch + "&appid=" + key;
+        // console.log(queryUrl);
 
         $.ajax({
             url: queryUrl,
@@ -27,10 +43,28 @@ $("#btn").on("click", function (e) {
         })
 
             .then(function (response) {
+console.log(response);
+for(var i=0; i < response.list.length; i++) {
+    if(response.list[i].dt_txt.indexOf("00:00:00") !==1){
+        var card= $("<div>")
+        // card.setClass("card")
+        var cardBody= $("<div>")
+        // cardBody.setClass("card-body")
+        // $("<p>" + response.list[i].main.temp + "</p>")
+        // $(".wind").text("Wind Speed: " + response.wind.speed);
+        $("<p>" + response.list[i]).appendTo(cardBody)
+
+        card.append(cardBody);
+        // $("#forecast").append(card);
+    }
+    
+}
+    $("#forecast").append(card);         
 
             });
+
     }
-    weather()
+    forecast()
     // create the local storage
     // create a function to keep the records of the city
     //create a function that will run the colors of the uv

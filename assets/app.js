@@ -6,9 +6,7 @@ $("#btn").on("click", function (e) {
     //grab a key from api weather
     var key = "71b2fba15d028a1cd9dcf3e77b5127d0";
     var userSearch = $("#userInput").val();
-    console.log(userSearch);
-    // var queryUrl= "https://api.openweathermap.org/data/2.5/forecast?q=Nashville&appid=" + key;
-    // console.log(queryUrl);
+
 
     //create a function to run the time
     function setTime() {
@@ -18,21 +16,57 @@ $("#btn").on("click", function (e) {
     }
 
     function weather() {
-        var queryUrlWeather ="https://api.openweathermap.org/data/2.5/weather?q=" + userSearch + "&appid=" + key;
-        
+        var queryUrlWeather = "https://api.openweathermap.org/data/2.5/weather?q=" + userSearch + "&appid=" + key;
+
+
+
         $.ajax({
             url: queryUrlWeather,
             method: "GET"
         })
 
-        .then(function (response) {
-            console.log(response);
+            .then(function (response) {
+                console.log(response);
+                var TempF = Math.floor((response.main.temp - 273.15) * 1.8 + 32)
+                var obj = new Date(response.dt * 1000)
+                var utcString = obj.toUTCString()
+                var time = utcString.slice(0, 3)
+                var lat = response.coord.lat
+                var lon = response.coord.lon
 
-            $("#city").text(response.name);
-        })
+
+
+
+                $("#city").text("City: " + response.name);
+                $("#date").text("Date: " + moment().format('dddd'));
+                $("#temp").text("Temp: " + TempF);
+                $("#humidity").text("Humidity: " + response.main.humidity);
+                $("#wind").text("Wind: " + response.wind.speed);
+                $("#uv").text()
+
+                var queryUrlUv = "http://api.openweathermap.org/data/2.5/uvi?appid=" + key + "&lat=" + lat + "&lon=" + lon
+
+
+
+                $.ajax({
+                    url: queryUrlUv,
+                    method: "GET"
+                })
+
+                    .then(function (response) {
+                        console.log(response);
+
+                        $("#uv").text(response.value)
+
+                    })
+
+
+
+
+            })
     }
     weather();
- //create a function that will run the 5 day forecast
+    //create a function that will run the 5 day forecast
     function forecast() {
         var queryUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + userSearch + "&appid=" + key;
         // console.log(queryUrl);
@@ -43,23 +77,23 @@ $("#btn").on("click", function (e) {
         })
 
             .then(function (response) {
-console.log(response);
-for(var i=0; i < response.list.length; i++) {
-    if(response.list[i].dt_txt.indexOf("00:00:00") !==1){
-        var card= $("<div>")
-        // card.setClass("card")
-        var cardBody= $("<div>")
-        // cardBody.setClass("card-body")
-        // $("<p>" + response.list[i].main.temp + "</p>")
-        // $(".wind").text("Wind Speed: " + response.wind.speed);
-        $("<p>" + response.list[i]).appendTo(cardBody)
+                console.log(response);
+                for (var i = 0; i < response.list.length; i++) {
+                    if (response.list[i].dt_txt.indexOf("00:00:00") !== 1) {
+                        var card = $("<div>")
+                        // card.setClass("card")
+                        var cardBody = $("<div>")
+                        // cardBody.setClass("card-body")
+                        // $("<p>" + response.list[i].main.temp + "</p>")
+                        // $(".wind").text("Wind Speed: " + response.wind.speed);
+                        $("<p>" + response.list[i]).appendTo(cardBody)
 
-        card.append(cardBody);
-        // $("#forecast").append(card);
-    }
-    
-}
-    $("#forecast").append(card);         
+                        card.append(cardBody);
+                        // $("#forecast").append(card);
+                    }
+
+                }
+                $("#forecast").append(card);
 
             });
 

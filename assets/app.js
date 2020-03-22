@@ -79,21 +79,21 @@ $("#btn").on("click", function (e) {
             .then(function (response) {
                 console.log(response);
                 for (var i = 0; i < response.list.length; i++) {
-                    if (response.list[i].dt_txt.indexOf("00:00:00") !== 1) {
+                    if (response.list[i].dt_txt.indexOf("00:00:00") !== -1) {
                         var card = $("<div>")
-                        // card.setClass("card")
+                        card.addClass("card")
                         var cardBody = $("<div>")
-                        // cardBody.setClass("card-body")
-                        // $("<p>" + response.list[i].main.temp + "</p>")
+                        cardBody.addClass("card-body")
+                        $("<p>").text(response.list[i].main.temp).appendTo(cardBody)
                         // $(".wind").text("Wind Speed: " + response.wind.speed);
-                        $("<p>" + response.list[i]).appendTo(cardBody)
+                        
 
                         card.append(cardBody);
-                        // $("#forecast").append(card);
+                        $("#forecast").append(card);
                     }
 
                 }
-                $("#forecast").append(card);
+                // $("#forecast").append(card);
 
             });
 
